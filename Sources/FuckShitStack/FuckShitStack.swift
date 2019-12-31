@@ -43,6 +43,18 @@ public class FuckShitStack {
 
     private let container: NSPersistentContainer
     private let backgroundQueue: OperationQueue
+    private var _backgroundContext = Protected<NSManagedObjectContext?>(nil)
+
+    private var backgroundContext: NSManagedObjectContext {
+        assert(backgroundQueue.isCurrent)
+        return _backgroundContext.access { context -> NSManagedObjectContext in
+            if context == nil {
+                context = container.newBackgroundContext()
+                context!.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+            }
+            return context!
+        }
+    }
 
     // MARK: Factory / Init
 
@@ -132,6 +144,8 @@ public class FuckShitStack {
                 if let error = error {
                     handler(.failure(error))
                 } else {
+                    container.viewContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
+                    container.viewContext.automaticallyMergesChangesFromParent = true
                     let stack = FuckShitStack(container: container)
                     handler(.success(stack))
                 }
@@ -207,7 +221,7 @@ public class FuckShitStack {
         let task = BackgroundTask.start()
         let op = BlockOperation { [weak self] in
             guard let this = self else { return }
-            let context = this.container.newBackgroundContext()
+            let context = this.backgroundContext
             context.performAndWait {
                 block(context)
                 if saveAfterward {
@@ -227,8 +241,8 @@ public class FuckShitStack {
     public func sync_performInBackground(_ block: @escaping (NSManagedObjectContext) -> Void) {
         let op = BlockOperation { [weak self] in
             guard let this = self else { return }
-            let context = this.container.newBackgroundContext()
-            context.performAndWait {
+            let context = this.backgroundContext
+            this.backgroundContext.performAndWait {
                 block(context)
             }
         }
