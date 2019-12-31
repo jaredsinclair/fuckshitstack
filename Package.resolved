@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Etcetera",
+        "repositoryURL": "https://github.com/jaredsinclair/etcetera.git",
+        "state": {
+          "branch": "spm",
+          "revision": "88b6533ddce800ef46cb07e8db5fc18d804f8c96",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
