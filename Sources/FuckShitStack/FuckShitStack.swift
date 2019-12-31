@@ -4,7 +4,7 @@
 //
 //  Created by Jared Sinclair on 7/9/16.
 //
-// Inspired by Black Pixel's "FuckShitStack" class:
+// Inspired by Black Pixel's "CoreDataStack" class:
 // https://medium.com/bpxl-craft/how-to-add-core-data-to-a-project-89c816ba0384#.wmview7ni
 
 import Foundation
