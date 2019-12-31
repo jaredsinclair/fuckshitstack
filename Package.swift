@@ -13,7 +13,7 @@ let package = Package(
             targets: ["FuckShitStack"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/jaredsinclair/etcetera.git", .branch("master")),
+        .package(url: "https://github.com/jaredsinclair/etcetera.git", .branch("develop")),
     ],
     targets: [
         .target(
