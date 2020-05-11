@@ -5,8 +5,8 @@
         "package": "Etcetera",
         "repositoryURL": "https://github.com/jaredsinclair/etcetera.git",
         "state": {
-          "branch": "master",
-          "revision": "d948f92d696db3ee61c2fcdfe8ed0c828fc7ad62",
+          "branch": "remove-submodule",
+          "revision": "b217fdd465226f93f81d62cebdb23358bddb006a",
           "version": null
         }
       }
